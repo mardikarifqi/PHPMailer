@@ -488,10 +488,13 @@ class SMTP
                         break;
                     }
                 }
+                
                 if (empty($authtype)) {
-                    $this->setError('No supported authentication methods found');
+                    // If advertised authtype empty, but authenticate is called, force using LOGIN (most server support this)
+                    $authtype = 'LOGIN';
 
-                    return false;
+                    // $this->setError('No supported authentication methods found');
+                    // return false;
                 }
                 $this->edebug('Auth method selected: ' . $authtype, self::DEBUG_LOWLEVEL);
             }
