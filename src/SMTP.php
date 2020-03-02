@@ -458,14 +458,15 @@ class SMTP
         }
 
         if (array_key_exists('EHLO', $this->server_caps)) {
+            // Some server is really not sending the AUTH advertising.
             // SMTP extensions are available; try to find a proper authentication method
-            if (!array_key_exists('AUTH', $this->server_caps)) {
-                $this->setError('Authentication is not allowed at this stage');
-                // 'at this stage' means that auth may be allowed after the stage changes
-                // e.g. after STARTTLS
+            // if (!array_key_exists('AUTH', $this->server_caps)) {
+            //     $this->setError('Authentication is not allowed at this stage');
+            //     // 'at this stage' means that auth may be allowed after the stage changes
+            //     // e.g. after STARTTLS
 
-                return false;
-            }
+            //     return false;
+            // }
 
             $this->edebug('Auth method requested: ' . ($authtype ?: 'UNSPECIFIED'), self::DEBUG_LOWLEVEL);
             $this->edebug(
