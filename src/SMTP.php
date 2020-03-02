@@ -500,11 +500,12 @@ class SMTP
                 $this->edebug('Auth method selected: ' . $authtype, self::DEBUG_LOWLEVEL);
             }
 
-            if (!in_array($authtype, $this->server_caps['AUTH'], true)) {
-                $this->setError("The requested authentication method \"$authtype\" is not supported by the server");
+            // Some server is really not sending the AUTH advertising.
+            // if (!in_array($authtype, $this->server_caps['AUTH'], true)) {
+            //     $this->setError("The requested authentication method \"$authtype\" is not supported by the server");
 
-                return false;
-            }
+            //     return false;
+            // }
         } elseif (empty($authtype)) {
             $authtype = 'LOGIN';
         }
